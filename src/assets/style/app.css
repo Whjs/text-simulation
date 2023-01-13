@@ -1,0 +1,41 @@
+.app-container {
+  padding: 5px;
+}
+.app-container .app-head {
+  display: flex;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.app-container .app-head .app-head-left {
+  display: flex;
+  flex: 1;
+}
+.app-container .app-head .app-head-left > span {
+  margin-right: 8px;
+}
+.app-container .app-head .app-head-left > span:last-child {
+  margin-right: 0;
+}
+.app-container .app-head .app-head-right {
+  display: flex;
+}
+.app-container .app-head .app-head-right > span {
+  margin-right: 8px;
+}
+.app-container .app-head .app-head-right > span:last-child {
+  margin-right: 0;
+}
+.app-container .split-line {
+  position: relative;
+}
+.app-container .split-line::after {
+  content: " ";
+  position: absolute;
+  top: 7px;
+  right: -4px;
+  width: 2px;
+  height: 16px;
+  background-color: #556B2F;
+}
