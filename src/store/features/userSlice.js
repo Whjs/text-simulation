@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getTimeText } from '@/utils'
 
 export const userSlice = createSlice({
   name: 'user',
@@ -11,6 +12,8 @@ export const userSlice = createSlice({
     cashSum: 100000, // 总现金
     assetsList: [], // 资产列表
     liability: [], // 负债列表
+    bankBorrow: [], // 银行借款
+    shadowBankBorrow: [], // 影子银行借款
   },
   // 这里的属性会自动的导出为actions，在组件中可以直接通过dispatch进行触发
   reducers: {
@@ -26,12 +29,15 @@ export const userSlice = createSlice({
     },
     addTime(state) {
       if (!state.timeState) return
-      state.time = state.time + state.timeState; // 内置了immutable
-      const year = Math.floor(state.time / 360) + 1
-      const month = Math.floor((state.time % 360) / 30) + 1
-      const day = state.time % 30 + 1
-      state.timeText = `${year}年${month}月${day}日`
+      state.time = state.time + state.timeState;
+      state.timeText = getTimeText(state.time)
     },
+    addBankBorrow(state, { payload }) {
+      state.bankBorrow.push({
+        ...payload.item,
+        id: `borrow-${Math.random()}`
+      })
+    }
   },
 })
 

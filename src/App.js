@@ -1,11 +1,12 @@
 // import Router from './routers'
 import React from 'react'
-import { Outlet } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 
 import { pauseTime, changeTimeState, addTime } from '@/store/features/userSlice'
 
 import '@/assets/style/app.less'
+import { americanStyleNum } from '@/utils'
 
 let timer = null
 const timeEvents = {}
@@ -38,18 +39,32 @@ function App() {
   timeEvents['addTime'] = () => {
     dispatch(addTime())
   }
+  const navigate = useNavigate()
+  const goHome = () => {
+    navigate('/app-list')
+  }
   return (
     <div className='app-container'>
       <div className='app-head'>
-        <div className='app-head-left'>
-        <span className='split-line'>总资产: { assetsSum }元</span>
-        <span>总现金: { cashSum }元</span>
+        <div className='app-head-left' onClick={ goHome }>
+          东林集团
         </div>
         <div className='app-head-right'>
           <span className='split-line'>时间: { timeText }</span>
           <span className='split-line' onClick={ speedClick }>倍数: { timeState }</span>
           <span onClick={ pauseTimeClick }>{ timeState !== 0 ? '暂停' : '开始' }</span>
         </div>
+      </div>
+      <div className='app-head'>
+        <div className='app-head-left'>
+          <span className='split-line'>总资产: { americanStyleNum(assetsSum) }元</span>
+          <span>总现金: { americanStyleNum(cashSum) }元</span>
+        </div>
+        {/* <div className='app-head-right'>
+          <span className='split-line'>时间: { timeText }</span>
+          <span className='split-line' onClick={ speedClick }>倍数: { timeState }</span>
+          <span onClick={ pauseTimeClick }>{ timeState !== 0 ? '暂停' : '开始' }</span>
+        </div> */}
       </div>
       <Outlet />
       {/* <h1>Bookkeeper</h1> */}
