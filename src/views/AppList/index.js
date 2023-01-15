@@ -35,7 +35,7 @@ function AppList() {
         人才中心
       </div>
       <div className='app-item'>
-        研发中心
+        科技中心
       </div>
       <div className='app-item' onClick={ () => goPath('/market') }>
         交易市场
